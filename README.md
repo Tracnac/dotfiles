@@ -1,2 +1,3 @@
 # dotfiles
-Home configuration
+
+Home configuration for $HOME
