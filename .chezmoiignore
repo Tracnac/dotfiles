@@ -1,3 +1,5 @@
 key.txt.age
 LICENSE
 README.md
+.ssh/known_hosts
+.ssh/authorized_keys
