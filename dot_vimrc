@@ -1,0 +1,145 @@
+" Reset to default
+set all&
+set nocompatible
+set backupdir=~/.vim/backup
+set dir=~/.vim/swap
+set viminfo='256,\"32768,:256,h,n~/.vim/.viminfo
+set history=8192
+set wildignore+=.swp
+set title
+
+" Plugins
+if filereadable(expand("~/.vim/autoload/plug.vim"))
+  runtime! autoload/plug.vim
+  silent! call plug#begin()
+  " Plug 'itchyny/lightline.vim'
+  Plug 'https://github.com/vim-airline/vim-airline.git'
+  Plug 'https://github.com/vim-airline/vim-airline-themes.git'
+  " Plug 'https://github.com/ryanoasis/vim-devicons.git'
+  " Plug 'https://github.com/arcticicestudio/nord-vim.git'
+  Plug 'https://github.com/edkolev/tmuxline.vim.git'
+  Plug 'https://github.com/tpope/vim-surround.git'
+  Plug 'https://github.com/tpope/vim-fugitive'
+  Plug 'https://github.com/luochen1990/rainbow.git'
+  Plug 'https://github.com/vim-scripts/YankRing.vim.git'
+  " Plug 'https://github.com/maxbrunsfeld/vim-yankstack'
+  " Plug 'https://github.com/preservim/nerdtree.git'
+  Plug 'https://tpope.io/vim/commentary.git'
+  " Plug 'https://github.com/vim-autoformat/vim-autoformat.git'
+  " Plug 'https://github.com/mbbill/undotree.git'
+  Plug 'https://github.com/ctrlpvim/ctrlp.vim'
+  " Plug 'prabirshrestha/async.vim'
+  " Plug 'prabirshrestha/vim-lsp'
+  " Plug 'prabirshrestha/asyncomplete.vim'
+  " Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  " Plug 'mattn/vim-lsp-settings'
+  call plug#end()
+endif
+
+" My sensible prefs
+set autoread
+set path+=,**
+set cursorline
+
+filetype plugin on
+syntax enable
+
+" set list
+set listchars=tab:→\ ,trail:·,precedes:«,extends:»,eol:¶
+
+let mapleader=','
+set timeoutlen=500
+
+if has('mouse')
+ set mouse=a
+endif
+
+set noerrorbells novisualbell t_vb=
+
+set number
+if exists('+relativenumber')
+  set relativenumber
+  :augroup numbertoggle
+  :  autocmd!
+  :  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  :augroup END
+endif
+
+set backspace=indent,eol,start
+set nowrap
+set wildmenu
+set et ts=2 sts=2 sw=2
+set encoding=UTF-8
+set ruler
+set rulerformat=%-14.(%l,%c%V%)\ %P
+set laststatus=2
+set noshowmode
+set showcmd
+
+" Search option
+set hlsearch
+set smartcase
+set showmatch
+set incsearch
+
+" Appearance
+colorscheme zellner
+if !has('gui_running')
+    set t_Co=256
+endif
+set statusline+=%#warningmsg#
+set statusline+=%*
+set statusline+=%{FugitiveStatusline()}
+
+if has("gui_running")
+  :set guifont='VictorMono NF':h16:cANSI:qDRAFT
+endif
+
+" Backup file
+" set noswapfile
+" set nobackup
+" set nowritebackup
+" set noundofile
+
+" Indent
+" set noautoindent
+" set nosmartindent
+" set nocindent
+" set inde=
+
+" Plugins prefs
+" Airline
+let g:airline#extensions#tabline#enabled=1
+let g:airline_powerline_fonts=1
+let g:airline_theme='bubblegum'
+" Tmuxline
+let g:tmuxline_powerline_separators=1
+" RainBow
+let g:rainbow_active=1
+" Yankring
+let g:yankring_history_dir = '~/.vim'
+
+" Autocmd
+" autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Shortcut
+nnoremap <silent> <tab>  :bnext!<CR>
+nnoremap <silent> <s-tab> :bprevious!<CR>
+nnoremap <silent> <CR>    :nohlsearch<CR>
+noremap <Leader>kt :call TrimWhitespace()<CR>
+noremap <Leader>ol :set nolist<CR>
+noremap <Leader>gy :YRShow<CR>
+noremap <Leader>fn :enew<CR>
+noremap <Leader>fw :bd<CR>
+
+let g:ctrlp_map = '<c-f>'
+
+" Func
+fun! TrimWhitespace()
+  let l:save = winsaveview()
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:save)
+endfun
+command! TrimWhitespace call TrimWhitespace()
+
