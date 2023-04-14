@@ -16,7 +16,7 @@
  '(mouse-wheel-inhibit-click-time 0)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(1 ((shift) . 1) ((meta)) ((control) . text-scale)))
- '(org-babel-load-languages '((shell . t) (emacs-lisp . t)))
+ '(org-babel-load-languages '((shell . t) (emacs-lisp . t) (C . t) (ocaml . t)))
  '(org-log-done 'time)
  '(org-log-done-with-time t)
  '(package-selected-packages '(use-package))
