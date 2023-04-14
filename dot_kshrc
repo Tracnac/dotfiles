@@ -1,5 +1,3 @@
-set -o emacs
-
 case "$(command -v vim)" in
   */vim) VIM=vim ;;
   *)     VIM=vi  ;;
