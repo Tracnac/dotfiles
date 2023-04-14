@@ -100,7 +100,8 @@ endif
 " set noswapfile
 " set nobackup
 " set nowritebackup
-" set noundofile
+set undofile
+set undodir=~/.vim/undo
 
 " Indent
 " set noautoindent
