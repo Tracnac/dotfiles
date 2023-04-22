@@ -1,33 +1,83 @@
 " Reset to default
 set all&
 set nocompatible
-set backupdir=~/.vim/backup
-set dir=~/.vim/swap
-set viminfo='256,\"32768,:256,h,n~/.vim/.viminfo
-set history=8192
-set wildignore+=.swp
-set title
+
+if exists('g:loaded_vimrc')
+  finish
+else
+  let g:loaded_vimrc = 'yes'
+endif
+
+let mapleader=" "
+
+let s:dir = has('win32') ? '$APPDATA/Vim' : '$HOME/.vim'
+let &backupdir = expand(s:dir) . '/backup//'
+let &undodir = expand(s:dir) . '/undo//'
+let &dir = expand(s:dir) . '/swap//'
+
+if !isdirectory(expand(s:dir) . 'backup')
+  call system("mkdir -p " . expand(s:dir) . "/{backup,undo,swap}")
+end
+
+" Plugins prefs
+" Airline
+let g:airline#extensions#tabline#enabled=1
+let g:airline_powerline_fonts=0
+let g:airline_theme='bubblegum'
+" Tmuxline
+let g:tmuxline_powerline_separators=0
+" RainBow
+let g:rainbow_active=1
+" Yankring
+let g:yankring_history_dir = '~/.vim/undo'
+let g:highlightedyank_highlight_in_visual = 0
+" Polyglot
+let g:polyglot_disabled = ['sensible']
+" Gutter
+set updatetime=250
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '>'
+let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_modified_removed = '<'
+let g:gitgutter_override_sign_column_highlight = 1
+" NerdTree
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+" Syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Plugins
 if filereadable(expand("~/.vim/autoload/plug.vim"))
   runtime! autoload/plug.vim
   silent! call plug#begin()
   " Plug 'itchyny/lightline.vim'
+  " Theme
   Plug 'https://github.com/vim-airline/vim-airline.git'
   Plug 'https://github.com/vim-airline/vim-airline-themes.git'
-  " Plug 'https://github.com/ryanoasis/vim-devicons.git'
-  " Plug 'https://github.com/arcticicestudio/nord-vim.git'
+  Plug 'https://github.com/ryanoasis/vim-devicons.git'
+  Plug 'https://github.com/arcticicestudio/nord-vim.git'
   Plug 'https://github.com/edkolev/tmuxline.vim.git'
+  " Tools
   Plug 'https://github.com/tpope/vim-surround.git'
-  Plug 'https://github.com/tpope/vim-fugitive'
   Plug 'https://github.com/luochen1990/rainbow.git'
-  Plug 'https://github.com/vim-scripts/YankRing.vim.git'
-  " Plug 'https://github.com/maxbrunsfeld/vim-yankstack'
-  " Plug 'https://github.com/preservim/nerdtree.git'
   Plug 'https://tpope.io/vim/commentary.git'
-  " Plug 'https://github.com/vim-autoformat/vim-autoformat.git'
-  " Plug 'https://github.com/mbbill/undotree.git'
+  Plug 'https://github.com/preservim/nerdtree.git'
   Plug 'https://github.com/ctrlpvim/ctrlp.vim'
+  " Plug 'https://github.com/vim-autoformat/vim-autoformat.git'
+  " Git
+  Plug 'https://github.com/tpope/vim-fugitive'
+  Plug 'https://github.com/airblade/vim-gitgutter.git'
+  " Clipboard and Undo
+  Plug 'https://github.com/vim-scripts/YankRing.vim.git'
+  Plug 'https://github.com/machakann/vim-highlightedyank.git'
+  " Plug 'https://github.com/mbbill/undotree.git'
+  " Language
+  Plug 'sheerun/vim-polyglot'
+  Plug 'https://github.com/vim-syntastic/syntastic.git'
   " Plug 'prabirshrestha/async.vim'
   " Plug 'prabirshrestha/vim-lsp'
   " Plug 'prabirshrestha/asyncomplete.vim'
@@ -37,24 +87,86 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 endif
 
 " My sensible prefs
-set autoread
+set undofile
+set viminfo='256,\"32768,:256,h,n~/.vim/.viminfo
+set history=8192
 set path+=,**
-set cursorline
+set wildignore+=*.o,*.out,*.obj,.git
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+set wildignore+=*.swp,*~,._*
 
-filetype plugin on
-syntax enable
+" filetype plugin on
+" syntax enable
 
-" set list
-set listchars=tab:→\ ,trail:·,precedes:«,extends:»,eol:¶
-
-let mapleader=','
+set title
+set shortmess+=I
+set hidden
 set timeoutlen=500
+set listchars=tab:→\ ,trail:·,precedes:«,extends:»,eol:¶
+set noerrorbells novisualbell t_vb=
+set backspace=indent,eol,start
+set nowrap
+set wildmenu
+set wildmode=longest,full
+set et ts=2 sts=2 sw=2
+set smarttab
+set encoding=utf-8
+set ruler
+set rulerformat=%-14.(%l,%c%V%)\ %P
+set laststatus=2
+set noshowmode
+set showcmd
+set autoread
+set cursorline
+set cursorlineopt=number
+set ttimeout
+set ttimeoutlen=100
+set display+=lastline
+set formatoptions+=j
+set wrap linebreak
+set showbreak=" "
+set shortmess+=A
+set nowritebackup
+set updatetime=300
+
+if !&scrolloff
+  set scrolloff=4
+endif
+if !&sidescrolloff
+  set sidescrolloff=4
+endif
+
+set winwidth=79
+set winheight=5
+set winminheight=5
+
+" Search option
+set hlsearch
+set smartcase
+set showmatch
+set incsearch
+
+" Appearance
+colorscheme nord
+if has('gui_running')
+  set guifont='VictorMono NF':h16:cANSI:qDRAFT
+endif
+if &t_Co >= 256
+  set termguicolors
+end
+if $TERM ==# 'screen-256color'
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+set statusline+=%#warningmsg#
+set statusline+=%{FugitiveStatusline()}
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 if has('mouse')
  set mouse=a
 endif
-
-set noerrorbells novisualbell t_vb=
 
 set number
 if exists('+relativenumber')
@@ -66,64 +178,6 @@ if exists('+relativenumber')
   :augroup END
 endif
 
-set backspace=indent,eol,start
-set nowrap
-set wildmenu
-set et ts=2 sts=2 sw=2
-set encoding=UTF-8
-set ruler
-set rulerformat=%-14.(%l,%c%V%)\ %P
-set laststatus=2
-set noshowmode
-set showcmd
-
-" Search option
-set hlsearch
-set smartcase
-set showmatch
-set incsearch
-
-" Appearance
-colorscheme zellner
-if !has('gui_running')
-    set t_Co=256
-endif
-set statusline+=%#warningmsg#
-set statusline+=%*
-set statusline+=%{FugitiveStatusline()}
-
-if has("gui_running")
-  :set guifont='VictorMono NF':h16:cANSI:qDRAFT
-endif
-
-" Backup file
-" set noswapfile
-" set nobackup
-" set nowritebackup
-set undofile
-set undodir=~/.vim/undo
-
-" Indent
-" set noautoindent
-" set nosmartindent
-" set nocindent
-" set inde=
-
-" Plugins prefs
-" Airline
-let g:airline#extensions#tabline#enabled=1
-let g:airline_powerline_fonts=1
-let g:airline_theme='bubblegum'
-" Tmuxline
-let g:tmuxline_powerline_separators=1
-" RainBow
-let g:rainbow_active=1
-" Yankring
-let g:yankring_history_dir = '~/.vim'
-
-" Autocmd
-" autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
 " Shortcut
 nnoremap <silent> <tab>  :bnext!<CR>
 nnoremap <silent> <s-tab> :bprevious!<CR>
@@ -131,16 +185,50 @@ nnoremap <silent> <CR>    :nohlsearch<CR>
 noremap <Leader>kt :call TrimWhitespace()<CR>
 noremap <Leader>ol :set nolist<CR>
 noremap <Leader>gy :YRShow<CR>
+noremap <Leader>gg :Git<CR>
 noremap <Leader>fn :enew<CR>
 noremap <Leader>fw :bd<CR>
-
+nnoremap Y y$
+noremap n nzz
+noremap N Nzz
+noremap gV `[v`]
+vmap <silent> <expr> p <sid>Repl()
+noremap <leader>gf :NERDTreeToggle<CR>
+noremap <leader>gF :NERDTreeFind<CR>
 let g:ctrlp_map = '<c-f>'
+" nnoremap <C-Left> <C-W>h
+" nnoremap <C-Down> <C-W>j
+" nnoremap <C-Up> <C-W>k
+" nnoremap <C-Right> <C-W>l
 
-" Func
+if empty(mapcheck('<C-U>', 'i'))
+  inoremap <C-U> <C-G>u<C-U>
+endif
+
+" Func and autocmd
 fun! TrimWhitespace()
   let l:save = winsaveview()
   keeppatterns %s/\s\+$//e
   call winrestview(l:save)
 endfun
 command! TrimWhitespace call TrimWhitespace()
+
+"Visual Yank
+function! RestoreRegister()
+  let @" = s:restore_reg
+  return ''
+endfunction
+function! s:Repl()
+  let s:restore_reg = @"
+  return "p@=RestoreRegister()\<cr>"
+endfunction
+
+" NerdTree
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+autocmd BufEnter NERD_* setlocal nornu | setlocal nonu
+" Start NERDTree when Vim starts with a directory argument.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd'.argv()[0] | endif
 
