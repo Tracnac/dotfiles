@@ -37,7 +37,17 @@ alias weather='curl https://wttr.in/Paris'
 alias svim="doas vim"
 alias svi="doas vi"
 
+# GPGAgent
+export GPG_TTY=$(tty)
+if ! pgrep -x -u "${USER}" gpg-agent &> /dev/null; then
+  gpg-connect-agent /bye &> /dev/null
+fi
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+
 if [ ! -z "${WINDOWID}" ]
 then
   tmux ls > /dev/null 2>&1 || tmux new -s DBAdmin
 fi
+
