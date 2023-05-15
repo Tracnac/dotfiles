@@ -1,6 +1,6 @@
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
+       '("melpa" . "http://melpa.org/packages/") t)
 
 (package-initialize)
 (unless (package-installed-p 'use-package)
@@ -145,7 +145,7 @@
  '(org-log-done 'time)
  '(org-log-done-with-time t)
  '(package-selected-packages
-   '(nano-modeline use-package-chords flycheck undo-fu-session which-key use-package undo-fu nano-theme evil smartparens rainbow-delimiters))
+   '(magit nano-modeline use-package-chords flycheck undo-fu-session which-key use-package undo-fu nano-theme evil smartparens rainbow-delimiters))
  '(prefer-coding-system 'utf-8)
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)

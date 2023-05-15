@@ -17,8 +17,6 @@
 #define nord14 #A3BE8C
 #define nord15 #B48EAD
 
-*font                   : -misc-fixed-medium-r-semicondensed-*-13-*-*-*-*-*-iso10646-1
-
 Xft.autohint            : 0
 Xft.lcdfilter           : lcddefault
 Xft.hintstyle           : hintslight

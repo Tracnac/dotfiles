@@ -23,7 +23,7 @@ end
 " Airline
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=0
-let g:airline_theme='bubblegum'
+let g:airline_theme='nord'
 " Tmuxline
 let g:tmuxline_powerline_separators=0
 " RainBow
@@ -151,13 +151,13 @@ colorscheme nord
 if has('gui_running')
   set guifont='VictorMono NF':h16:cANSI:qDRAFT
 endif
-if &t_Co >= 256
-  set termguicolors
-end
-if $TERM ==# 'screen-256color'
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
+" if &t_Co >= 256
+"   set termguicolors
+" end
+" if $TERM ==# 'screen-256color'
+"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" endif
 
 set statusline+=%#warningmsg#
 set statusline+=%{FugitiveStatusline()}
