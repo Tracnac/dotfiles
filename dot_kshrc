@@ -1,3 +1,5 @@
+set -o emacs
+
 case "$(command -v vim)" in
   */vim) VIM=vim ;;
   *)     VIM=vi  ;;
@@ -31,10 +33,7 @@ fi
 alias ls="$LS -FHh"
 alias ll='ls -l'
 alias la='ls -lA'
-alias ..='cd ..'
-alias ...='cd ...'
 alias weather='curl https://wttr.in/Paris'
-alias svim="doas vim"
 alias svi="doas vi"
 
 # GPGAgent
