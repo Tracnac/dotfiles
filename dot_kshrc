@@ -1,9 +1,9 @@
-set -o emacs
-
 case "$(command -v vim)" in
   */vim) VIM=vim ;;
   *)     VIM=vi  ;;
 esac
+export EDITOR=$VIM
+set -o emacs
 
 export TZ=Europe/Paris
 export LANG=en_US.UTF-8
@@ -13,7 +13,6 @@ export LC_MEASUREMENT=fr_FR.UTF-8
 export LC_TIME=fr_FR.UTF-8
 export LC_NUMERIC=fr_FR.UTF-8
 
-export EDITOR=$VIM
 export FCEDIT=$EDITOR
 export PAGER=less
 export LESS='-iMRS -x2'
@@ -38,15 +37,16 @@ alias svi="doas vi"
 
 # GPGAgent
 export GPG_TTY=$(tty)
-if ! pgrep -x -u "${USER}" gpg-agent &> /dev/null; then
-  gpg-connect-agent /bye &> /dev/null
-fi
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-fi
+{
+  if ! pgrep -x -u "${USER}" gpg-agent; then
+    gpg-connect-agent /bye
+  fi
+  if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+    export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+  fi
+} 1>/dev/null 2>&1
 
 if [ ! -z "${WINDOWID}" ]
 then
   tmux ls > /dev/null 2>&1 || tmux new -s DBAdmin
 fi
-
