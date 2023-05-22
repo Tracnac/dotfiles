@@ -8,33 +8,13 @@
 
 
 * {
-	nord0: #2e3440;
-	nord1: #3b4252;
-	nord2: #434c5e;
-	nord3: #4c566a;
-
-	nord4: #d8dee9;
-	nord5: #e5e9f0;
-	nord6: #eceff4;
-
-	nord7: #8fbcbb;
-	nord8: #88c0d0;
-	nord9: #81a1c1;
-	nord10: #5e81ac;
-	nord11: #bf616a;
-
-	nord12: #d08770;
-	nord13: #ebcb8b;
-	nord14: #a3be8c;
-	nord15: #b48ead;
-
-    foreground:  @nord9;
-    backlight:   #ccffeedd;
+    foreground:  {{.color.color9}};
+    backlight:   {{.color.color8}};
     background-color:  transparent;
     
-    highlight:     underline bold #eceff4;
+    highlight:     underline bold {{.color.color6}};
 
-    transparent: rgba(46,52,64,0);
+    transparent: {{.color.color0}};
 }
 
 window {
@@ -45,7 +25,7 @@ window {
     border:  0px;
     border-radius: 6px;
 
-    background-color: @transparent;
+    background-color: {{.color.color0}};
     spacing: 0;
     children:  [mainbox];
     orientation: horizontal;
@@ -57,21 +37,21 @@ mainbox {
 }
 
 message {
-    color: @nord0;
+    color: {{.color.color0}};
     padding: 5;
-    border-color: @foreground;
+    border-color: {{.color.color9}};
     border:  0px 2px 2px 2px;
-    background-color: @nord7;
+    background-color: {{.color.color7}};
 }
 
 inputbar {
-    color: @nord6;
+    color: {{.color.color6}};
     padding: 11px;
-    background-color: #3b4252;
+    background-color: {{.color.color1}};
 
     border: 1px;
     border-radius:  6px 6px 0px 0px;
-    border-color: @nord10;
+    border-color: {{.color.color10}};
 }
 
 entry, prompt, case-indicator {
@@ -86,9 +66,9 @@ prompt {
 listview {
     padding: 8px;
     border-radius: 0px 0px 6px 6px;
-    border-color: @nord10;
+    border-color: {{.color.color10}};
     border: 0px 1px 1px 1px;
-    background-color: rgba(46,52,64,0.9);
+    background-color: {{.color.color0}};
     dynamic: false;
 }
 
@@ -97,13 +77,13 @@ element {
     vertical-align: 0.5;
     border-radius: 4px;
     background-color: transparent;
-    color: @foreground;
-    text-color: rgb(216, 222, 233);
+    color: {{.color.color9}};
+    text-color: {{.color.color4}};
 }
 
 element selected.normal {
-	background-color: @nord7;
-	text-color: #2e3440;
+	background-color: {{.color.color7}};
+	text-color: {{.color.color0}};
 }
 
 element-text, element-icon {
@@ -113,16 +93,15 @@ element-text, element-icon {
 
 button {
     padding: 6px;
-    color: @foreground;
+    color: {{.color.color9}};
     horizontal-align: 0.5;
 
     border: 2px 0px 2px 2px;
     border-radius: 4px 0px 0px 4px;
-    border-color: @foreground;
+    border-color: {{.color.color9}};
 }
 
 button selected normal {
     border: 2px 0px 2px 2px;
-    border-color: @foreground;
+    border-color: {{.color.color9}};
 }
-

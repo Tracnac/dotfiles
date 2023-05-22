@@ -1,9 +1,19 @@
 wmname LG3D
 
+# TODO: XF86AudioMicMute
+# sysctl kern.audio.record=1 && sndioctl input.mute=0 input.level=0.5
+
+{{- if eq .chezmoi.os "openbsd" }}
+XF86AudioMute
+ sndioctl output.mute=!
+XF86Audio{Lower,Raise}Volume
+ sndioctl output.level={-0.1,+0.1}
+{{- else }}
 XF86AudioMute
  amixer -c 1 -q set 'Master' toggle
 XF86Audio{Lower,Raise}Volume
  amixer -c 1 -q set 'Master' {5%-,5%+}
+{{- end }}
 
 XF86MonBrightness{Up,Down}
  xbacklight {-inc,-dec} 5
@@ -15,10 +25,18 @@ Print + {_,super,super + shift}
  sleep 0.2 ; xdotool key XF86Ungrab ; scrot -z -f -e 'mv $f ~/Pictures/Captures' {_,-u,-s -l style=dash,width=2}
 
 Return + {super,super + shift}
-     /usr/bin/alacritty {_, --class 'alacritty-floating'}
+{{- if eq .chezmoi.os "openbsd" }}
+ /usr/local/bin/alacritty {_, --class 'alacritty-floating'}
+{{- else }}
+ /usr/bin/alacritty {_, --class 'alacritty-floating'}
+{{- end }}
 
 space + {super, super + shift}
-   /usr/bin/rofi -show {drun, run}
+{{- if eq .chezmoi.os "openbsd" }}
+ /usr/local/bin/rofi -show {drun, run}
+{{- else }}
+ /usr/bin/rofi -show {drun, run}
+{{- end }}
 
 l + super + shift
  i3lock -u -t -i ~/.wallpaper.png

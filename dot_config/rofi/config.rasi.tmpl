@@ -1,5 +1,5 @@
 configuration {
-    font: "VictorMono Nerd Font 10";
+    font: "{{ if hasKey .rofi "fontname" }}{{.rofi.fontname}}{{else}}{{.font.name}}{{end}} {{ if hasKey .rofi "fontsize" }}{{.rofi.fontsize }}{{else}}{{.font.size}}{{end}}";
     line-margin: 10;
 
     display-ssh:    "";

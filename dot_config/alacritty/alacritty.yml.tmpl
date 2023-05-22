@@ -113,7 +113,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: "VictorMono Nerd Font"
+    family: "{{ if hasKey .alacritty "fontname" }}{{.alacritty.fontname}}{{else}}{{.font.name}}{{end}}"
     # The `style` can be specified to pick a specific face.
     style: Regular
   # Bold font face
@@ -122,7 +122,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "VictorMono Nerd Font"
+    family: "{{ if hasKey .alacritty "fontname" }}{{.alacritty.fontname}}{{else}}{{.font.name}}{{end}}"
     # The `style` can be specified to pick a specific face.
     style: Bold
   # Italic font face
@@ -131,7 +131,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "VictorMono Nerd Font"
+    family: "{{ if hasKey .alacritty "fontname" }}{{.alacritty.fontname}}{{else}}{{.font.name}}{{end}}"
     # The `style` can be specified to pick a specific face.
     style: Italic
   # Bold italic font face
@@ -140,11 +140,11 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "VictorMono Nerd Font"
+    family: "{{ if hasKey .alacritty "fontname" }}{{.alacritty.fontname}}{{else}}{{.font.name}}{{end}}"
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
   # Point size
-  size: 10.0
+  size: {{ if hasKey .alacritty "fontsize" }}{{.alacritty.fontsize }}{{else}}{{.font.size}}{{end}}
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
@@ -165,7 +165,7 @@ font:
   #builtin_box_drawing: true
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
-# Colors (Tomorrow Night)
+# Colors (Nord theme)
 colors:
   primary:
     background: "#2e3440"
