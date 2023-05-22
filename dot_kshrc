@@ -1,15 +1,10 @@
-<<<<<<< HEAD
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-=======
->>>>>>> e960eda2c0dacea877745db5d4fc5084fe7f21f8
 case "$(command -v vim)" in
   */vim) VIM=vim ;;
   *)     VIM=vi  ;;
 esac
-export EDITOR=$VIM
-set -o emacs
 
 export TZ=Europe/Paris
 export LANG=en_US.UTF-8
@@ -19,11 +14,8 @@ export LC_MEASUREMENT=fr_FR.UTF-8
 export LC_TIME=fr_FR.UTF-8
 export LC_NUMERIC=fr_FR.UTF-8
 
-<<<<<<< HEAD
 export EDITOR=$VIM
 set -o emacs
-=======
->>>>>>> e960eda2c0dacea877745db5d4fc5084fe7f21f8
 export FCEDIT=$EDITOR
 export PAGER=less
 export LESS='-iMRS -x2'
@@ -55,12 +47,9 @@ export GPG_TTY=$(tty)
     export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
   fi
 } 1>/dev/null 2>&1
-<<<<<<< HEAD
 
 export PS1="{\A} \u@\l [\W] \$ "
 export PATH=~/.go/bin:~/.bin:${PATH}
-=======
->>>>>>> e960eda2c0dacea877745db5d4fc5084fe7f21f8
 
 if [ ! -z "${WINDOWID}" ]
 then
