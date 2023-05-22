@@ -16,6 +16,16 @@
     color13="#EBCB8B"
     color14="#A3BE8C"
     color15="#B48EAD"
+    
+    dimblack="#373e4d"
+    dimred="#94545d"
+    dimgreen="#809575"
+    dimyellow="#b29e75"
+    dimblue="#68809a"
+    dimmagenta="#8c738c"
+    dimcyan="#6d96a5"
+    dimwhite="#aeb3bb"
+
 
 [font]
     name="VictorMono Nerd Font"

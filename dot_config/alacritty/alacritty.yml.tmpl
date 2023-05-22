@@ -168,52 +168,53 @@ font:
 # Colors (Nord theme)
 colors:
   primary:
-    background: "#2e3440"
-    foreground: "#d8dee9"
+    background: "{{.color.color0}}"
+    foreground: "{{.color.color4}}"
     dim_foreground: "#a5abb6"
   cursor:
-    text: "#2e3440"
-    cursor: "#d8dee9"
+    text: "{{.color.color0}}"
+    cursor: "{{.color.color4}}"
   vi_mode_cursor:
-    text: "#2e3440"
-    cursor: "#d8dee9"
+    text: "{{.color.color0}}"
+    cursor: "{{.color.color4}}"
   selection:
     text: CellForeground
-    background: "#4c566a"
+    background: "{{.color.color3}}"
   search:
     matches:
       foreground: CellBackground
-      background: "#88c0d0"
+      background: "{{.color.color8}}"
   footer_bar:
-      background: "#434c5e"
-      foreground: "#d8dee9"
+      background: "{{.color.color2}}"
+      foreground: "{{.color.color4}}"
   normal:
-    black: "#3b4252"
-    red: "#bf616a"
-    green: "#a3be8c"
-    yellow: "#ebcb8b"
-    blue: "#81a1c1"
-    magenta: "#b48ead"
-    cyan: "#88c0d0"
-    white: "#e5e9f0"
+    black: "{{.color.color1}}"
+    red: "{{.color.color11}}"
+    green: "{{.color.color14}}"
+    yellow: "{{.color.color13}}"
+    blue: "{{.color.color9}}"
+    magenta: "{{.color.color15}}"
+    cyan: "{{.color.color8}}"
+    white: "{{.color.color5}}"
   bright:
-    black: "#4c566a"
-    red: "#bf616a"
-    green: "#a3be8c"
-    yellow: "#ebcb8b"
-    blue: "#81a1c1"
-    magenta: "#b48ead"
-    cyan: "#8fbcbb"
-    white: "#eceff4"
+    black: "{{.color.color3}}"
+    red: "{{.color.color11}}"
+    green: "{{.color.color14}}"
+    yellow: "{{.color.color13}}"
+    blue: "{{.color.color9}}"
+    magenta: "{{.color.color15}}"
+    cyan: "{{.color.color7}}"
+    white: "{{.color.color6}}"
   dim:
-    black: "#373e4d"
-    red: "#94545d"
-    green: "#809575"
-    yellow: "#b29e75"
-    blue: "#68809a"
-    magenta: "#8c738c"
-    cyan: "#6d96a5"
-    white: "#aeb3bb"
+    black: "{{.color.dimblack}}"
+    red: "{{.color.dimred}}"
+    green: "{{.color.dimgreen}}"
+    yellow: "{{.color.dimyellow}}"
+    blue: "{{.color.dimblue}}"
+    magenta: "{{.color.dimmagenta}}"
+    cyan: "{{.color.dimcyan}}"
+    white: "{{.color.dimwhite}}"
+
   # Cursor colors
   #
   # Colors which should be used to draw the terminal cursor.
