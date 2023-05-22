@@ -118,8 +118,9 @@
 
     ### Text ###
 
-    font = "VictorMono Nerd Font" 10
-
+    font = {{ if hasKey .dunst "fontname" }}"{{.dunst.fontname }}" {{else}}{{.font.name}} {{end}}
+           {{- if hasKey .dunst "fontsize" }}{{.dunst.fontsize }}{{else}}{{.font.size}}{{end}}  
+   
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
     line_height = 0

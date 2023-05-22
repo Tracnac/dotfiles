@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+
+# load Xresources file
+[[ -f "${HOME}/.Xdefaults" ]] && xrdb -merge "${HOME}/.Xdefaults"
+[[ -f "${HOME}/.Xresources" ]] && xrdb -merge "${HOME}/.Xresources"
+
+# Return to safe value
+xbacklight -set 75%
+amixer -c 1 -q set 'Master' 25%
+xsetroot -cursor_name left_ptr
+
+# Reset MPC/MPD
+mpc load radioparadise
+mpc pause
+
+# Add xrandr logic
+xrandr --output DP-4 --left-of HDMI-0
+
+# Add xprop mouse logic
+#xinput --list --id-only "$(xinput --list --name-only | grep Corsair)"
+#xinput --set-prop 15 309 -0.8
+
+# Background
+hsetroot -tile ${HOME}/.wallpaper.png
+
+setxkbmap fr
+
+if [ -f ~/.bspwm ];
+then
+  export _JAVA_AWT_WM_NONREPARENTING=1
+  sxhkd &
+  dbus-launch bspwm -c ~/.config/bspwm/bspwmrc
+else
+  dbus-launch cwm
+fi

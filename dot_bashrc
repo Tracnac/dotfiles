@@ -1,3 +1,5 @@
+# .bashrc
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -15,27 +17,13 @@ export LC_TIME=fr_FR.UTF-8
 export LC_NUMERIC=fr_FR.UTF-8
 
 export EDITOR=$VIM
-set -o emacs
 export FCEDIT=$EDITOR
 export PAGER=less
 export LESS='-iMRS -x2'
 export CLICOLOR=1
-
-export HISTFILE="${HOME}/.ksh_history"
-export HISTSIZE=32768
 export HISTCONTROL=erasedups:ignorespace
-
-if command -v colorls > /dev/null ; then
-  LS='colorls'
-else
-  LS='ls'
-fi
-
-alias ls="$LS -FHh"
-alias ll='$LS -l'
-alias la='$LS -lA'
-alias weather='curl https://wttr.in/Limours'
-alias svi="doas vi"
+export HISTSIZE=65535
+export HISTTIMEFORMAT="%d/%m/%y %T "
 
 # GPGAgent
 export GPG_TTY=$(tty)
@@ -48,10 +36,13 @@ export GPG_TTY=$(tty)
   fi
 } 1>/dev/null 2>&1
 
-export PS1="{\A} \u@\l [\W] \$ "
-export PATH=~/.go/bin:~/.bin:${PATH}
+# Alias
+alias weather='curl https://wttr.in/Limours'
+
+export PATH=~/.bin:~/.go/bin:${PATH}
+export PS1="{\A} \u@\h:\l/\$? [\W] \$ "
 
 if [ ! -z "${WINDOWID}" ]
 then
-  tmux ls > /dev/null 2>&1 || tmux new -s DBAdmin
+  tmux ls > /dev/null 2>&1 || tmux new -s Tracnac
 fi
