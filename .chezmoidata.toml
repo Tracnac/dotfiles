@@ -28,8 +28,10 @@
 
 
 [font]
-    name="VictorMono Nerd Font"
+    name="VictorMono NF"
+    namealt="VictorMono NFP"
     size=10
+    sizealt=10
 
 [xft]
     dpy=96
@@ -45,3 +47,5 @@
 [sxhkd]
 
 [alacritty]
+
+[emacs]

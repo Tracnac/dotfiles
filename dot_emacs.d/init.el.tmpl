@@ -10,9 +10,9 @@
 (use-package nano-theme
   :ensure t
   :init
-  (setq nano-font-family-monospaced "VictorMono NF")
-  (setq nano-font-family-proportional "VictorMono NF")
-  (setq nano-font-size 10)
+  (setq nano-font-family-monospaced "{{ if hasKey .emacs "fontname" }}{{.emacs.fontname}}{{else}}{{.font.name}}{{end}}")
+  (setq nano-font-family-proportional "{{ if hasKey .emacs "fontnamealt" }}{{.emacs.fontnamealt}}{{else}}{{.font.namealt}}{{end}}")
+  (setq nano-font-size {{ if hasKey .emacs "fontsize" }}{{.emacs.fontsize }}{{else}}{{.font.size}}{{end}})
   :config
   (load-theme 'nano-light t))
 
@@ -22,7 +22,7 @@
   (setq evil-undo-system 'undo-fu)
   (setq evil-want-Y-yank-to-eol t)
   (setq evil-want-fine-undo t)
-  (setq evil-normal-state-cursor '("DarkOrange" (hbar . 2)))
+  (setq evil-normal-state-cursor '("darkorange" (hbar . 2)))
   :config
   (evil-mode t)
   )
