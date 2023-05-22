@@ -6,14 +6,17 @@
 
 # Return to safe value
 xbacklight -set 75%
+{{- if eq .chezmoi.os "openbsd" }}
+sndioctl output.level=0.25
+{{- else }}
 amixer -c 1 -q set 'Master' 25%
+{{- end }}
 xsetroot -cursor_name left_ptr
 
 # Reset MPC/MPD
 mpc load radioparadise
 mpc pause
 
-# Add xrandr logic
 xrandr --output DP-4 --left-of HDMI-0
 
 # Add xprop mouse logic
