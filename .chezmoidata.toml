@@ -34,7 +34,7 @@
     sizealt=10
 
 [xft]
-    dpy=96
+    dpy=120
 
 [dunst]
 

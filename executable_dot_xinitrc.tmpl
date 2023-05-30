@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 # load Xresources file
-[[ -f "${HOME}/.Xdefaults" ]] && xrdb -merge "${HOME}/.Xdefaults"
-[[ -f "${HOME}/.Xresources" ]] && xrdb -merge "${HOME}/.Xresources"
+if [ -f "${HOME}/.Xdefaults" ]; then xrdb -merge "${HOME}/.Xdefaults"; fi
+if [ -f "${HOME}/.Xresources" ]; then xrdb -merge "${HOME}/.Xresources"; fi
 
 # Return to safe value
 xbacklight -set 75%
@@ -17,8 +17,6 @@ xsetroot -cursor_name left_ptr
 mpc load radioparadise
 mpc pause
 
-xrandr --output DP-4 --left-of HDMI-0
-
 # Add xprop mouse logic
 #xinput --list --id-only "$(xinput --list --name-only | grep Corsair)"
 #xinput --set-prop 15 309 -0.8
@@ -27,6 +25,13 @@ xrandr --output DP-4 --left-of HDMI-0
 hsetroot -tile ${HOME}/.assets/wallpaper.png
 
 setxkbmap fr
+
+if xrandr -q | grep -q "HDMI-0 connected"
+then
+    xrandr --output DP-4 --left-of HDMI-0 --output HDMI-0 --auto
+else
+    xrandr --output DP-4  --primary --mode 1920x1080 --pos 0x0  --rotate normal --output HDMI-0 --off
+fi
 
 if [ -f ~/.bspwm ];
 then

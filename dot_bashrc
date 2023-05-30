@@ -1,7 +1,16 @@
 # .bashrc
-
+ 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+
+appendpath () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH="${PATH:+$PATH:}$1"
+    esac
+}
 
 case "$(command -v vim)" in
   */vim) VIM=vim ;;
@@ -39,7 +48,10 @@ export GPG_TTY=$(tty)
 # Alias
 alias weather='curl https://wttr.in/Limours'
 
-export PATH=~/.bin:~/.go/bin:${PATH}
+appendpath '~/.bin'
+appendpath '~/.go/bin'
+export PATH
+
 export PS1="{\A} \u@\h:\l/\$? [\W] \$ "
 
 if [ ! -z "${WINDOWID}" ]
