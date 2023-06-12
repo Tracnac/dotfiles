@@ -21,7 +21,11 @@ XF86MonBrightness{Up,Down}
 XF86Audio{Prev,Next,Stop,Play}
  mpc {prev,next,stop,toggle}
 
+# Print via XF86 keys or P
 Print + {_,super,super + shift}
+ sleep 0.2 ; xdotool key XF86Ungrab ; scrot -z -f -e 'mv $f ~/Pictures/Captures' {_,-u,-s -l style=dash,width=2}
+
+p + super ;  {f,w,c}
  sleep 0.2 ; xdotool key XF86Ungrab ; scrot -z -f -e 'mv $f ~/Pictures/Captures' {_,-u,-s -l style=dash,width=2}
 
 Return + {super,super + shift}
@@ -45,45 +49,49 @@ l + super + shift
 # BSPWM
 #
 
-# Quit/Restart bspwm / Reload polybar, sxhkd
+# Quit
 q + super + shift
   bspc quit
 
+# Restart sxhkd
 r + super +shift
-  pkill -SIGUSR1 -u $(id -u) sxhkd 
+  pkill -SIGUSR1 -u $(id -u) sxhkd
 
 # close or kill
-w + {super,super + shift}
+w + super + {_,shift}
  bspc node -{c,k}
 
 # Node
 
 # Split horizontal, vertical or cancel
-{h,v,q} + super
- bspc node -p {east,south,cancel}
+o + super ; {Left,Down,Up,Right} 
+ bspc node -p {west,south,north,east}
+
+Escape + super
+ bspc node -p cancel
 
 # Preselect the ratio
 r + super ; {1-9}
  bspc node -o 0.{1-9}
 
 # Toggle beetwen floating & tiled
-f + super
-  bspc node -t "~floating"
+f + super {_,shift}
+  bspc node -t {"~floating", "~fullscreen"}
 
 # Tiled & pseudo tiled mode
 t + {super,super + shift}
   bspc node -t {tiled,~tiled}
 
-# Send the window to another edge of the screen
-super + {_,shift} + {j,k,i,l}
- bspc node -{f,s} {west,south,north,east}
+# Focus
+super + {Left,Down,Up,Right}
+ bspc node -f {west,south,north,east}
 
 # Switch to last opened node
-Tab + super
- bspc node -f last
+#Tab + super +  {_,shift}
+# bspc node -f {next,prev}
 
 # Expand / Contract
-{Left,Down,Up,Right} + super
+super + shift + {Left,Down,Up,Right}
  bspc node -z {left -20 0 || bspc node -z right -20 0,\
         bottom 0 20 || bspc node -z top 0 20,\
         top 0 -20 || bspc node -z bottom 0 -20,\
@@ -92,16 +100,24 @@ Tab + super
 # Desktop
 
 # Send focused window to another workspace
-super + {_,shift + }{1-5}
- bspc {desktop -f,node -d} '^{1-5}'
+super + {_,shift} + {ampersand,eacute,quotedbl,apostrophe,parenleft,minus,egrave,underscore,ccedilla,agrave}
+ bspc {desktop -f,node -d} '^{1-9,10}'
 
-# Send focused window to another monitor
-0 + super
- bspc node -m pointed
+# Focus pointed window
+dead_circumflex + super
+ bspc node -f pointed
 
 # alternate between the tiled and monocle layout
 m + super
  bspc desktop -l next
+
+# Send to overlay
+o + shift + super
+ bspc node -n last.!automatic
+
+# Rotate tree
+Tab + super + {_, shift}
+    bspc node @/ -C {forward,backward}
 
 super + o ; {e,w,m}
  {emacs,firefox,thunderbird}
